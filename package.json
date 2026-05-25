@@ -1,0 +1,10 @@
+{
+  "name": "nexapos-landing-page",
+  "version": "1.0.0",
+  "description": "NexaPOS Landing Page, Employee Registration Portal, and Serverless API",
+  "main": "index.html",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "pg": "^8.11.3"
+  }
+}

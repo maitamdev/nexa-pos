@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexaPOS - Đăng Ký Tài Khoản Nhân Viên</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Đăng ký tài khoản nhân viên cho hệ thống quản lý bán hàng NexaPOS.">
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #05070f;
+            --card-bg: rgba(16, 23, 42, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glow Background */
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(99, 102, 241, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(99, 102, 241, 0.02) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-1 {
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.1);
+            filter: blur(130px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: -20%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(168, 85, 247, 0.1);
+            filter: blur(130px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Container & Card */
+        .register-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .register-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #a855f7 100%);
+            border-radius: 16px;
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.25);
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4b5563;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px 14px 46px;
+            background: rgba(8, 12, 22, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(8, 12, 22, 0.9);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+        }
+
+        .form-input:focus + .input-icon {
+            color: var(--primary-color);
+        }
+
+        select.form-input {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Messages */
+        .message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--success-color);
+        }
+
+        .message-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--error-color);
+        }
+
+        .success-box {
+            text-align: center;
+            display: none;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            color: var(--success-color);
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .success-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            90% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <div class="register-container">
+        <div class="register-card">
+            <!-- Normal Form State -->
+            <div id="form-container">
+                <div class="header">
+                    <div class="logo-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <h1 class="title">Đăng Ký Nhân Viên</h1>
+                    <p class="subtitle">Tạo tài khoản mới kết nối đồng bộ đám mây NexaPOS</p>
+                </div>
+
+                <div id="msg-error" class="message message-error">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span id="msg-error-text">Đã xảy ra lỗi</span>
+                </div>
+
+                <form id="register-form">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Họ và Tên</label>
+                        <div class="input-wrapper">
+                            <input class="form-input" type="text" id="name" required placeholder="Nguyễn Văn A">
+                            <i class="fa-regular fa-user input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Công Việc</label>
+                        <div class="input-wrapper">
+                            <input class="form-input" type="email" id="email" required placeholder="nhanvien@company.com">
+                            <i class="fa-regular fa-envelope input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="password">Mật Khẩu</label>
+                        <div class="input-wrapper">
+                            <input class="form-input" type="password" id="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
+                            <i class="fa-solid fa-lock input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="role">Vai Trò Hệ Thống</label>
+                        <div class="input-wrapper">
+                            <select class="form-input" id="role" required>
+                                <option value="CASHIER">Thu ngân (CASHIER)</option>
+                                <option value="INVENTORY">Thủ kho (INVENTORY)</option>
+                                <option value="MANAGER">Quản lý (MANAGER)</option>
+                                <option value="ADMIN">Quản trị viên hệ thống (ADMIN)</option>
+                            </select>
+                            <i class="fa-solid fa-user-gear input-icon"></i>
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <button class="btn-submit" type="submit" id="btn-submit">
+                        <span id="btn-text">Đăng Ký Tài Khoản</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success State -->
+            <div id="success-container" class="success-box">
+                <div class="success-icon"><i class="fa-regular fa-circle-check"></i></div>
+                <h1 class="title">Đăng Ký Thành Công!</h1>
+                <p class="success-text">
+                    Tài khoản nhân viên đã được khởi tạo và lưu trữ trên Cloud Database.<br>
+                    Bây giờ bạn có thể mở ứng dụng <strong>NexaPOS Desktop</strong> và sử dụng email vừa đăng ký để đăng nhập hệ thống.
+                </p>
+                <button class="btn-submit" onclick="window.close()">Đóng Cửa Sổ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('register-form');
+        const formContainer = document.getElementById('form-container');
+        const successContainer = document.getElementById('success-container');
+        const btnSubmit = document.getElementById('btn-submit');
+        const btnText = document.getElementById('btn-text');
+        const msgError = document.getElementById('msg-error');
+        const msgErrorText = document.getElementById('msg-error-text');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // UI State
+            msgError.style.display = 'none';
+            btnSubmit.disabled = true;
+            btnText.innerText = 'Đang đăng ký...';
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password, role })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    formContainer.style.display = 'none';
+                    successContainer.style.display = 'block';
+                } else {
+                    throw new Error(result.error || 'Đăng ký không thành công!');
+                }
+            } catch (err) {
+                msgErrorText.innerText = err.message;
+                msgError.style.display = 'flex';
+                btnSubmit.disabled = false;
+                btnText.innerText = 'Đăng Ký Tài Khoản';
+            }
+        });
+    </script>
+</body>
+</html>
