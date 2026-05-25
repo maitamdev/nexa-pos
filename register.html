@@ -43,6 +43,7 @@
             justify-content: center;
             overflow-x: hidden;
             position: relative;
+            padding: 40px 20px;
         }
 
         /* Ambient Glow Background */
@@ -87,7 +88,6 @@
         .register-container {
             width: 100%;
             max-width: 500px;
-            padding: 20px;
             position: relative;
             z-index: 10;
         }
@@ -203,6 +203,24 @@
             pointer-events: none;
         }
 
+        .section-divider {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.08);
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         /* Submit Button */
         .btn-submit {
             width: 100%;
@@ -245,6 +263,7 @@
             display: none;
             align-items: center;
             gap: 10px;
+            line-height: 1.4;
         }
 
         .message-success {
@@ -297,17 +316,18 @@
                 <div class="header">
                     <div class="logo-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                     <h1 class="title">Đăng Ký Nhân Viên</h1>
-                    <p class="subtitle">Tạo tài khoản mới kết nối đồng bộ đám mây NexaPOS</p>
+                    <p class="subtitle">Tạo tài khoản nhân viên mới và đồng bộ đám mây NexaPOS</p>
                 </div>
 
                 <div id="msg-error" class="message message-error">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <i class="fa-solid fa-triangle-exclamation" style="flex-shrink: 0;"></i>
                     <span id="msg-error-text">Đã xảy ra lỗi</span>
                 </div>
 
                 <form id="register-form">
+                    <!-- New Employee Info -->
                     <div class="form-group">
-                        <label class="form-label" for="name">Họ và Tên</label>
+                        <label class="form-label" for="name">Họ và Tên Nhân Viên</label>
                         <div class="input-wrapper">
                             <input class="form-input" type="text" id="name" required placeholder="Nguyễn Văn A">
                             <i class="fa-regular fa-user input-icon"></i>
@@ -315,7 +335,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="email">Email Công Việc</label>
+                        <label class="form-label" for="email">Email Nhân Viên</label>
                         <div class="input-wrapper">
                             <input class="form-input" type="email" id="email" required placeholder="nhanvien@company.com">
                             <i class="fa-regular fa-envelope input-icon"></i>
@@ -323,7 +343,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="password">Mật Khẩu</label>
+                        <label class="form-label" for="password">Mật Khẩu Nhân Viên</label>
                         <div class="input-wrapper">
                             <input class="form-input" type="password" id="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
                             <i class="fa-solid fa-lock input-icon"></i>
@@ -344,8 +364,32 @@
                         </div>
                     </div>
 
+                    <!-- Authorization Section -->
+                    <div class="section-divider">
+                        <div class="section-title">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Xác nhận bởi Quản lý</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="manager-email">Email Quản Lý / Admin</label>
+                            <div class="input-wrapper">
+                                <input class="form-input" type="email" id="manager-email" required placeholder="manager@company.com">
+                                <i class="fa-solid fa-user-shield input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="manager-password">Mật Khẩu Quản Lý / Admin</label>
+                            <div class="input-wrapper">
+                                <input class="form-input" type="password" id="manager-password" required placeholder="••••••••">
+                                <i class="fa-solid fa-key input-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
                     <button class="btn-submit" type="submit" id="btn-submit">
-                        <span id="btn-text">Đăng Ký Tài Khoản</span>
+                        <span id="btn-text">Đăng Ký Nhân Viên</span>
                     </button>
                 </form>
             </div>
@@ -355,8 +399,8 @@
                 <div class="success-icon"><i class="fa-regular fa-circle-check"></i></div>
                 <h1 class="title">Đăng Ký Thành Công!</h1>
                 <p class="success-text">
-                    Tài khoản nhân viên đã được khởi tạo và lưu trữ trên Cloud Database.<br>
-                    Bây giờ bạn có thể mở ứng dụng <strong>NexaPOS Desktop</strong> và sử dụng email vừa đăng ký để đăng nhập hệ thống.
+                    Tài khoản nhân viên mới đã được kích hoạt trên hệ thống đám mây.<br>
+                    Nhân viên có thể mở ứng dụng <strong>NexaPOS Desktop</strong> và sử dụng email vừa đăng ký để đăng nhập ngay lập tức.
                 </p>
                 <button class="btn-submit" onclick="window.close()">Đóng Cửa Sổ</button>
             </div>
@@ -378,12 +422,14 @@
             // UI State
             msgError.style.display = 'none';
             btnSubmit.disabled = true;
-            btnText.innerText = 'Đang đăng ký...';
+            btnText.innerText = 'Đang xác thực & đăng ký...';
 
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const role = document.getElementById('role').value;
+            const managerEmail = document.getElementById('manager-email').value.trim();
+            const managerPassword = document.getElementById('manager-password').value;
 
             try {
                 const response = await fetch('/api/register', {
@@ -391,7 +437,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ name, email, password, role })
+                    body: JSON.stringify({ name, email, password, role, managerEmail, managerPassword })
                 });
 
                 const result = await response.json();
@@ -406,7 +452,7 @@
                 msgErrorText.innerText = err.message;
                 msgError.style.display = 'flex';
                 btnSubmit.disabled = false;
-                btnText.innerText = 'Đăng Ký Tài Khoản';
+                btnText.innerText = 'Đăng Ký Nhân Viên';
             }
         });
     </script>
