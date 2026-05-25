@@ -16,27 +16,19 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, password, role, managerEmail, managerPassword } = req.body || {};
+  const { storeName, adminName, email, password } = req.body || {};
 
-  if (!name || !email || !password || !role || !managerEmail || !managerPassword) {
-    return res.status(400).json({ error: 'Vui lòng cung cấp đầy đủ thông tin (bao gồm tài khoản xác thực của Quản lý)!' });
+  if (!storeName || !adminName || !email || !password) {
+    return res.status(400).json({ error: 'Vui lòng cung cấp đầy đủ thông tin!' });
   }
 
-  // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email) || !emailRegex.test(managerEmail)) {
+  if (!emailRegex.test(email)) {
     return res.status(400).json({ error: 'Email không hợp lệ!' });
   }
 
-  // Validate password length
   if (password.length < 6) {
-    return res.status(400).json({ error: 'Mật khẩu nhân viên phải từ 6 ký tự trở lên!' });
-  }
-
-  // Validate role
-  const validRoles = ['ADMIN', 'MANAGER', 'CASHIER', 'INVENTORY'];
-  if (!validRoles.includes(role.toUpperCase())) {
-    return res.status(400).json({ error: 'Vai trò nhân viên không hợp lệ!' });
+    return res.status(400).json({ error: 'Mật khẩu phải từ 6 ký tự trở lên!' });
   }
 
   const client = new Client({
@@ -49,43 +41,37 @@ module.exports = async (req, res) => {
   try {
     await client.connect();
 
-    // 1. Authenticate Manager
-    const managerRes = await client.query('SELECT * FROM "Employee" WHERE email = $1', [managerEmail]);
-    if (managerRes.rows.length === 0) {
-      return res.status(401).json({ error: 'Tài khoản Quản lý xác thực không tồn tại!' });
-    }
-
-    const manager = managerRes.rows[0];
-    if (!bcrypt.compareSync(managerPassword, manager.passwordHash)) {
-      return res.status(401).json({ error: 'Mật khẩu xác thực Quản lý không chính xác!' });
-    }
-
-    if (manager.role !== 'ADMIN' && manager.role !== 'MANAGER') {
-      return res.status(403).json({ error: 'Tài khoản xác thực không có quyền Quản lý/Quản trị!' });
-    }
-
-    if (!manager.isActive) {
-      return res.status(403).json({ error: 'Tài khoản Quản lý xác thực đang bị khóa!' });
-    }
-
-    // 2. Check if new employee email already exists
+    // Check if email already exists globally
     const checkRes = await client.query('SELECT id FROM "Employee" WHERE email = $1', [email]);
     if (checkRes.rows.length > 0) {
-      return res.status(400).json({ error: 'Email nhân viên này đã được đăng ký trên hệ thống!' });
+      return res.status(400).json({ error: 'Email này đã được đăng ký cho một tài khoản khác!' });
     }
 
-    // 3. Hash password
-    const passwordHash = bcrypt.hashSync(password, 10);
-    const id = crypto.randomUUID();
+    // Start Transaction
+    await client.query('BEGIN');
 
-    // Insert new employee
+    // 1. Create Store
+    const storeId = crypto.randomUUID();
     await client.query(
-      'INSERT INTO "Employee" (id, email, name, "passwordHash", role, "isActive", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())',
-      [id, email, name, passwordHash, role.toUpperCase(), true]
+      'INSERT INTO "Store" (id, name, "createdAt", "updatedAt") VALUES ($1, $2, NOW(), NOW())',
+      [storeId, storeName]
     );
 
-    return res.status(200).json({ success: true, message: 'Đăng ký tài khoản nhân viên thành công!' });
+    // 2. Create Admin Employee linked to Store
+    const passwordHash = bcrypt.hashSync(password, 10);
+    const empId = crypto.randomUUID();
+
+    await client.query(
+      'INSERT INTO "Employee" (id, "storeId", email, name, "passwordHash", role, "isActive", "createdAt", "updatedAt") VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW())',
+      [empId, storeId, email, adminName, passwordHash, 'ADMIN', true]
+    );
+
+    // Commit Transaction
+    await client.query('COMMIT');
+
+    return res.status(200).json({ success: true, message: 'Đăng ký Cửa hàng thành công!' });
   } catch (error) {
+    await client.query('ROLLBACK');
     console.error('Registration error:', error);
     return res.status(500).json({ error: 'Lỗi máy chủ kết nối Database: ' + error.message });
   } finally {

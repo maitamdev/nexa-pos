@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexaPOS - Đăng Ký Tài Khoản Nhân Viên</title>
+    <title>NexaPOS - Đăng Ký Cửa Hàng & Admin</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Đăng ký tài khoản nhân viên cho hệ thống quản lý bán hàng NexaPOS.">
+    <meta name="description" content="Đăng ký cửa hàng mới trên hệ thống quản lý bán hàng NexaPOS.">
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -315,8 +315,8 @@
             <div id="form-container">
                 <div class="header">
                     <div class="logo-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-                    <h1 class="title">Đăng Ký Nhân Viên</h1>
-                    <p class="subtitle">Tạo tài khoản nhân viên mới và đồng bộ đám mây NexaPOS</p>
+                    <h1 class="title">Đăng Ký Cửa Hàng</h1>
+                    <p class="subtitle">Khởi tạo cửa hàng mới và đồng bộ đám mây NexaPOS</p>
                 </div>
 
                 <div id="msg-error" class="message message-error">
@@ -325,71 +325,41 @@
                 </div>
 
                 <form id="register-form">
-                    <!-- New Employee Info -->
+                    <!-- New Store Info -->
                     <div class="form-group">
-                        <label class="form-label" for="name">Họ và Tên Nhân Viên</label>
+                        <label class="form-label" for="storeName">Tên Cửa Hàng / Doanh Nghiệp</label>
                         <div class="input-wrapper">
-                            <input class="form-input" type="text" id="name" required placeholder="Nguyễn Văn A">
+                            <input class="form-input" type="text" id="storeName" required placeholder="Ví dụ: Nexa Coffee">
+                            <i class="fa-solid fa-shop input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="adminName">Họ và Tên Quản Trị Viên</label>
+                        <div class="input-wrapper">
+                            <input class="form-input" type="text" id="adminName" required placeholder="Nguyễn Văn A">
                             <i class="fa-regular fa-user input-icon"></i>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="email">Email Nhân Viên</label>
+                        <label class="form-label" for="email">Email Đăng Nhập</label>
                         <div class="input-wrapper">
-                            <input class="form-input" type="email" id="email" required placeholder="nhanvien@company.com">
+                            <input class="form-input" type="email" id="email" required placeholder="admin@company.com">
                             <i class="fa-regular fa-envelope input-icon"></i>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="password">Mật Khẩu Nhân Viên</label>
+                        <label class="form-label" for="password">Mật Khẩu</label>
                         <div class="input-wrapper">
                             <input class="form-input" type="password" id="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
                             <i class="fa-solid fa-lock input-icon"></i>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="role">Vai Trò Hệ Thống</label>
-                        <div class="input-wrapper">
-                            <select class="form-input" id="role" required>
-                                <option value="CASHIER">Thu ngân (CASHIER)</option>
-                                <option value="INVENTORY">Thủ kho (INVENTORY)</option>
-                                <option value="MANAGER">Quản lý (MANAGER)</option>
-                                <option value="ADMIN">Quản trị viên hệ thống (ADMIN)</option>
-                            </select>
-                            <i class="fa-solid fa-user-gear input-icon"></i>
-                            <i class="fa-solid fa-chevron-down select-arrow"></i>
-                        </div>
-                    </div>
-
-                    <!-- Authorization Section -->
-                    <div class="section-divider">
-                        <div class="section-title">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <span>Xác nhận bởi Quản lý</span>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="manager-email">Email Quản Lý / Admin</label>
-                            <div class="input-wrapper">
-                                <input class="form-input" type="email" id="manager-email" required placeholder="manager@company.com">
-                                <i class="fa-solid fa-user-shield input-icon"></i>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="manager-password">Mật Khẩu Quản Lý / Admin</label>
-                            <div class="input-wrapper">
-                                <input class="form-input" type="password" id="manager-password" required placeholder="••••••••">
-                                <i class="fa-solid fa-key input-icon"></i>
-                            </div>
-                        </div>
-                    </div>
-
                     <button class="btn-submit" type="submit" id="btn-submit">
-                        <span id="btn-text">Đăng Ký Nhân Viên</span>
+                        <span id="btn-text">Đăng Ký Cửa Hàng</span>
                     </button>
                 </form>
             </div>
@@ -399,8 +369,8 @@
                 <div class="success-icon"><i class="fa-regular fa-circle-check"></i></div>
                 <h1 class="title">Đăng Ký Thành Công!</h1>
                 <p class="success-text">
-                    Tài khoản nhân viên mới đã được kích hoạt trên hệ thống đám mây.<br>
-                    Nhân viên có thể mở ứng dụng <strong>NexaPOS Desktop</strong> và sử dụng email vừa đăng ký để đăng nhập ngay lập tức.
+                    Cửa hàng của bạn đã được khởi tạo thành công trên hệ thống đám mây.<br>
+                    Vui lòng mở ứng dụng <strong>NexaPOS Desktop</strong> và sử dụng email vừa đăng ký để đăng nhập ngay lập tức.
                 </p>
                 <button class="btn-submit" onclick="window.close()">Đóng Cửa Sổ</button>
             </div>
@@ -424,12 +394,10 @@
             btnSubmit.disabled = true;
             btnText.innerText = 'Đang xác thực & đăng ký...';
 
-            const name = document.getElementById('name').value.trim();
+            const storeName = document.getElementById('storeName').value.trim();
+            const adminName = document.getElementById('adminName').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
-            const role = document.getElementById('role').value;
-            const managerEmail = document.getElementById('manager-email').value.trim();
-            const managerPassword = document.getElementById('manager-password').value;
 
             try {
                 const response = await fetch('/api/register', {
@@ -437,7 +405,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ name, email, password, role, managerEmail, managerPassword })
+                    body: JSON.stringify({ storeName, adminName, email, password })
                 });
 
                 const result = await response.json();
