@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>NexaPOS - Hệ Thống Quản Lý Bán Hàng & Kho Hàng Thông Minh</title>
+    <meta name="description" content="NexaPOS là hệ thống quản lý bán hàng (POS) thế hệ mới trên nền tảng Desktop Electron. Tích hợp AI gợi ý nhập kho, đồng bộ Cloud Supabase thời gian thực, bảo mật phân quyền tối cao.">
+    <meta name="keywords" content="NexaPOS, phần mềm bán hàng, POS, quản lý kho, Electron, React, Supabase, AI gợi ý nhập hàng">
+    <meta name="author" content="NexaPOS Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NexaPOS - Hệ Thống Quản Lý Bán Hàng Thông Minh">
+    <meta property="og:description" content="Mạnh mẽ trên Desktop, Đồng bộ Cloud tức thì, Đề xuất nhập kho thông minh bằng AI.">
+    <meta property="og:image" content="assets/dashboard-mockup.png">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glow Elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="NexaPOS Logo" class="logo-img" id="header-logo">
+                <span class="logo-text">Nexa<span>POS</span></span>
+            </a>
+            
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="#features"><i class="fa-solid fa-star icon-nav"></i>Tính Năng</a></li>
+                    <li><a href="#tech-stack"><i class="fa-solid fa-layer-group icon-nav"></i>Công Nghệ</a></li>
+                    <li><a href="#developers"><i class="fa-solid fa-code icon-nav"></i>Nhóm Phát Triển</a></li>
+                    <li><a href="#downloads" class="btn-nav-download" id="nav-download-btn"><i class="fa-solid fa-download"></i>Tải Xuống</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="badge-new animate-fade-in"><i class="fa-solid fa-sparkles"></i> Phiên Bản Mới 1.0.0</span>
+                    <h1 class="hero-title animate-slide-up">
+                        Hệ Thống Quản Lý Bán Hàng <span class="gradient-text">Thông Minh Thế Hệ Mới</span>
+                    </h1>
+                    <p class="hero-subtitle animate-slide-up-delay">
+                        Trải nghiệm sức mạnh của phần mềm POS Desktop chuyên nghiệp kết hợp với công nghệ Cloud đồng bộ thời gian thực và trí tuệ nhân tạo (AI) phân tích nhập kho tối ưu.
+                    </p>
+                    
+                    <div class="hero-actions animate-slide-up-delay-more">
+                        <a href="#download-options" class="btn btn-primary btn-lg" id="hero-download-windows">
+                            <i class="fa-brands fa-windows"></i>
+                            <span>
+                                <span class="btn-subtext">Tải xuống cho</span>
+                                <span class="btn-maintext">Windows x64</span>
+                            </span>
+                        </a>
+                        <a href="#download-options" class="btn btn-secondary btn-lg" id="hero-download-mac">
+                            <i class="fa-brands fa-apple"></i>
+                            <span>
+                                <span class="btn-subtext">Tải xuống cho</span>
+                                <span class="btn-maintext">macOS DMG</span>
+                            </span>
+                        </a>
+                    </div>
+                    
+                    <div class="hero-meta animate-slide-up-delay-more">
+                        <span><i class="fa-solid fa-circle-check"></i> Hoàn toàn miễn phí</span>
+                        <span><i class="fa-solid fa-shield-halved"></i> Mã hóa Bcrypt bảo mật</span>
+                        <span><i class="fa-solid fa-cloud"></i> Đồng bộ Supabase</span>
+                    </div>
+                </div>
+                
+                <div class="hero-visual animate-fade-in-right">
+                    <div class="visual-wrapper">
+                        <img src="assets/dashboard-mockup.png" alt="NexaPOS App Interface Preview" class="app-screenshot" id="hero-screenshot">
+                        <div class="visual-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Tính Năng Nổi Bật</span>
+                    <h2 class="section-title">Giải Pháp POS Toàn Diện & Hiện Đại</h2>
+                    <p class="section-subtitle">Được thiết kế để giải quyết triệt để các vấn đề của mô hình quản lý bán hàng truyền thống.</p>
+                </div>
+                
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3>Gợi Ý Nhập Hàng Bằng AI</h3>
+                        <p>Hệ thống tự động phân tích tốc độ tiêu thụ sản phẩm trong 7 ngày qua để đưa ra cảnh báo tồn kho thấp và số lượng đề xuất nhập hàng chính xác.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>Đồng Bộ Cloud Tức Thì</h3>
+                        <p>Sự kết hợp hoàn hảo giữa cơ sở dữ liệu local nhanh chóng và Cloud Supabase (PostgreSQL) đảm bảo dữ liệu của bạn luôn an toàn và đồng bộ thời gian thực.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3>Bảo Mật & Phân Quyền Sâu</h3>
+                        <p>Toàn bộ mật khẩu nhân viên được mã hóa một chiều bằng Bcrypt. Hệ thống phân quyền chặt chẽ giữa Quản trị viên (Admin), Quản lý (Manager) và Thu ngân (Cashier).</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-print"></i>
+                        </div>
+                        <h3>In Hóa Đơn & Xuất Báo Cáo</h3>
+                        <p>In hóa đơn trực tiếp ra các máy in nhiệt chuyên dụng (K80/K57). Đồng thời hỗ trợ xuất nhanh dữ liệu doanh thu, sản phẩm ra định dạng PDF và CSV (UTF-8).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack Section -->
+        <section id="tech-stack" class="tech-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Công Nghệ Sử Dụng</span>
+                    <h2 class="section-title">Nền Tảng Hiện Đại, Vận Hành Bền Bỉ</h2>
+                    <p class="section-subtitle">Ứng dụng những công nghệ tiên tiến nhất hiện nay để đảm bảo hiệu năng tối ưu trên máy tính trạm.</p>
+                </div>
+                
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/electron/electron-original.svg" alt="Electron JS" class="tech-logo">
+                        <h4>Electron JS</h4>
+                        <p>Môi trường phân phối ứng dụng Desktop đa nền tảng mạnh mẽ.</p>
+                    </div>
+                    <div class="tech-card">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="tech-logo">
+                        <h4>React + Vite</h4>
+                        <p>Tối ưu hóa UI/UX mượt mà, phản hồi lập tức và thời gian build siêu tốc.</p>
+                    </div>
+                    <div class="tech-card">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="tech-logo">
+                        <h4>TypeScript</h4>
+                        <p>Kiểm soát kiểu chặt chẽ, giảm thiểu lỗi runtime của hệ thống.</p>
+                    </div>
+                    <div class="tech-card">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="tech-logo">
+                        <h4>Supabase DB</h4>
+                        <p>Hệ quản trị cơ sở dữ liệu mạnh mẽ lưu trữ an toàn trên đám mây đám mây.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Developers / Showcase Section -->
+        <section id="developers" class="dev-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Nhóm Phát Triển</span>
+                    <h2 class="section-title">Sản Phẩm Đồ Án Tốt Nghiệp Xuất Sắc</h2>
+                    <p class="section-subtitle">Được phát triển với tất cả tâm huyết nhằm giải quyết các bài toán vận hành thực tế trong ngành bán lẻ lẻ.</p>
+                </div>
+                
+                <div class="dev-card-wrapper">
+                    <div class="dev-card">
+                        <div class="dev-avatar">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <h3>Dự Án NexaPOS</h3>
+                        <p class="dev-role">Hệ Thống Quản Lý POS Toàn Diện</p>
+                        <p class="dev-desc">Dự án hoàn chỉnh gồm Desktop App viết bằng Electron, Backend Prisma và PostgreSQL đồng bộ đám mây.</p>
+                        <div class="dev-socials">
+                            <a href="#" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+                            <a href="#" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="#" aria-label="Contact Email"><i class="fa-solid fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Options Section -->
+        <section id="downloads" class="download-section">
+            <div class="container">
+                <div class="download-card">
+                    <div class="download-glow"></div>
+                    <h2>Sẵn Sàng Nâng Tầm Quản Lý?</h2>
+                    <p>Tải xuống NexaPOS ngay hôm nay và trải nghiệm hệ thống quản lý bán hàng chuyên nghiệp, mượt mà và thông minh hoàn toàn miễn phí.</p>
+                    
+                    <div class="download-options-grid" id="download-options">
+                        <div class="download-box">
+                            <div class="box-icon"><i class="fa-brands fa-windows"></i></div>
+                            <h3>Bản Cài Đặt Windows</h3>
+                            <span class="box-desc">NexaPOS-Setup-1.0.0.exe</span>
+                            <span class="box-size">Dung lượng: ~85 MB</span>
+                            <button class="btn btn-primary btn-block download-trigger" data-file="NexaPOS-Setup-1.0.0.exe" id="btn-dl-win-installer">
+                                <i class="fa-solid fa-download"></i> Tải bản Cài Đặt (.exe)
+                            </button>
+                        </div>
+                        
+                        <div class="download-box">
+                            <div class="box-icon"><i class="fa-brands fa-windows"></i></div>
+                            <h3>Bản Portable Windows</h3>
+                            <span class="box-desc">NexaPOS-Portable-1.0.0.zip</span>
+                            <span class="box-size">Dung lượng: ~80 MB</span>
+                            <button class="btn btn-secondary btn-block download-trigger" data-file="NexaPOS-Portable-1.0.0.zip" id="btn-dl-win-portable">
+                                <i class="fa-solid fa-download"></i> Tải bản Portable (.zip)
+                            </button>
+                        </div>
+
+                        <div class="download-box">
+                            <div class="box-icon"><i class="fa-brands fa-apple"></i></div>
+                            <h3>Bản macOS DMG</h3>
+                            <span class="box-desc">NexaPOS-1.0.0.dmg</span>
+                            <span class="box-size">Dung lượng: ~92 MB</span>
+                            <button class="btn btn-secondary btn-block download-trigger" data-file="NexaPOS-1.0.0.dmg" id="btn-dl-mac">
+                                <i class="fa-solid fa-download"></i> Tải bản macOS (.dmg)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">Nexa<span>POS</span></span>
+                <p>Hệ thống POS Desktop thông minh cho doanh nghiệp bán lẻ.</p>
+            </div>
+            <div class="footer-links">
+                <p>&copy; 2026 NexaPOS. Bản quyền thuộc về nhóm phát triển đồ án.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Download Modal Dialog -->
+    <div class="modal-overlay" id="download-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+            <div class="modal-icon"><i class="fa-solid fa-circle-down animate-bounce"></i></div>
+            <h3>Đang chuẩn bị tệp tải xuống...</h3>
+            <p>Trình duyệt sẽ tự động tải xuống tệp <strong id="modal-filename">NexaPOS-Setup-1.0.0.exe</strong> trong giây lát.</p>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+            </div>
+            <p class="download-status" id="download-status">Đang khởi tạo kết nối...</p>
+            
+            <div class="modal-actions">
+                <a href="#" class="btn btn-primary" id="modal-direct-link"><i class="fa-solid fa-link"></i> Click vào đây nếu không tự động tải</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="main.js"></script>
+</body>
+</html>
